@@ -2,14 +2,10 @@
 
 MyScene::MyScene() : Scene()
 {
-	player = new Sprite("assets/kingkong.tga");
-	player->position = glm::vec3(920.0f, 300.0f, 0.0f);
-	this->addSprite(player);
-
-	testy = new TestEntity();
-	testy->AddSprite("assets/rgba.tga");
-	testy->position = glm::vec3(200.0f, 300.0f, 0.0f);
-	this->AddChild(testy);
+	player = new TestEntity();
+	player->AddSprite("assets/rgba.tga");
+	player->position = glm::vec3(200.0f, 300.0f, 0.0f);
+	this->AddChild(player);
 }
 
 MyScene::~MyScene()

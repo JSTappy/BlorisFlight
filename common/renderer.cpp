@@ -100,10 +100,10 @@ void Renderer::renderScene(Scene* scene)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Render all te sprites
-	/*for (Sprite* sprite : scene->sprites())
+	for (Sprite* sprite : scene->sprites())
 	{
 		this->renderSprite(sprite);
-	}*/
+	}
 	for (Entity* entity : scene->Children())
 	{
 		this->renderEntity(entity);
@@ -116,19 +116,14 @@ void Renderer::renderScene(Scene* scene)
 
 void Renderer::renderEntity(Entity* entity)
 {
-	this->renderSprite(entity->eSprite());
-}
-
-void Renderer::renderSprite(Sprite* sprite)
-{
 	// get view + projectionmatrix from camera
 	glm::mat4 viewMatrix = _camera->getViewMatrix();
 	glm::mat4 projectionMatrix = _camera->getProjectionMatrix();
 
 	// Build the Model matrix from Sprite transform
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(sprite->position.x, sprite->position.y, 0.0f));
-	glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(0.0f, 0.0f, sprite->rotation);
-	glm::mat4 scalingMatrix     = glm::scale(glm::mat4(1.0f), glm::vec3(sprite->scale.x, sprite->scale.y, 1.0f));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(entity->position.x, entity->position.y, 0.0f));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, entity->rotation);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(entity->scale.x, entity->scale.y, 1.0f));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
@@ -139,6 +134,11 @@ void Renderer::renderSprite(Sprite* sprite)
 	GLuint matrixID = glGetUniformLocation(_programID, "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
+	this->renderSprite(entity->eSprite());
+}
+
+void Renderer::renderSprite(Sprite* sprite)
+{
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 	Sprite* s = _resman.GetTarga(sprite->TextureName());

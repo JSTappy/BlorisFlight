@@ -15,8 +15,7 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	Sprite* player;
-	TestEntity* testy;
+	TestEntity* player;
 
 };
 
