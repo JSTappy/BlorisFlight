@@ -89,6 +89,10 @@ add_executable(demo # g++ demo/demo.cpp -o demo
 	demo/MyScene.cpp
 	Bloris/TestEntity.cpp
 	Bloris/TestEntity.h
+	Bloris/Player.cpp
+	Bloris/Player.h
+	Bloris/Bullet.cpp
+	Bloris/Bullet.h
 )
 target_link_libraries(demo # g++ -lcommon
 	common

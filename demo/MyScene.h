@@ -4,7 +4,7 @@
 #include "common/scene.h"
 #include "common/game.h"
 #include "common/entity.h"
-#include "Bloris/TestEntity.h"
+#include "Bloris/Player.h"
 
 class MyScene : public Scene
 {
@@ -15,7 +15,7 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	TestEntity* player;
+	Player* player;
 
 };
 
