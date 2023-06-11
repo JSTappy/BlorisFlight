@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <common/entity.h>
+#include <common/timer.h>
 #include <Bloris/Bullet.h>
 
 class Enemy : public Entity
@@ -15,6 +16,7 @@ public:
 	std::vector <Bullet*> bullets;
 private:
 	Bullet* bullet;
+	Timer* timer;
 };
 
 #endif /* ENEMY_H */

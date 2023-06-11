@@ -80,6 +80,8 @@ add_library(common # ar rcs libcommon.a
 	common/inputmanager.h
 	common/inputmanager.cpp
 	common/keyconfig.h
+	common/timer.h
+	common/timer.cpp
 )
 
 # Demo

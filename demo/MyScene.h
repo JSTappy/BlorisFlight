@@ -4,10 +4,10 @@
 #include "common/scene.h"
 #include "common/game.h"
 #include "common/entity.h"
+#include "common/timer.h"
 #include "Bloris/Player.h"
 #include "Bloris/Enemy.h"
 #include "Bloris/Spawner.h"
-#include <cmath>
 
 class MyScene : public Scene
 {
