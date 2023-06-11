@@ -14,6 +14,8 @@ void Game::Run(Scene* scene)
 	float dt = renderer.updateDeltaTime();
 	scene->camera()->computeViewMatrixFromInput(renderer.window(), dt);
 
+	//update scene and camera
+	_inMan->InputUpdate(renderer.window());
 	scene->update(dt);
 	
 	// Render the scene
