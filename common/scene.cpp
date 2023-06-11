@@ -9,31 +9,14 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	// Delete all the sprites
-	for (size_t i = 0; i < _sprites.size(); i++)
+	// Delete all the children
+	for (size_t i = 0; i < children.size(); i++)
 	{
-		delete _sprites[i];
-		_sprites[i] = nullptr;
+		delete children[i];
+		children[i] = nullptr;
 	}
-	_sprites.clear();
+	children.clear();
 
 	// Delete camera
 	delete _camera;
 }
-
-void Scene::update(float deltaTime)
-{
-	
-}
-
-void Scene::addSprite(Sprite* sprite)
-{
-	_sprites.push_back(sprite);
-}
-
-//void Scene::addSpriteAsChild(Sprite* sprite)
-//{
-//	TestEntity* spriteChild = new TestEntity();
-//	spriteChild->AddSprite(sprite->TextureName());
-//	_sprites.push_back(sprite);
-//}

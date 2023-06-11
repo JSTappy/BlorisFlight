@@ -13,10 +13,9 @@ void Game::Run(Scene* scene)
 	// get deltaTime and update camera
 	float dt = renderer.updateDeltaTime();
 	scene->camera()->computeViewMatrixFromInput(renderer.window(), dt);
-
-	//update scene and camera
 	_inMan->InputUpdate(renderer.window());
-	scene->update(dt);
+
+	this->UpdateEntity(scene, dt);
 	
 	// Render the scene
 	renderer.renderScene(scene);
@@ -28,5 +27,14 @@ void Game::Run(Scene* scene)
 	else
 	{
 		running = false;
+	}
+
+}
+void Game::UpdateEntity(Entity* e, float deltaTime)
+{
+	e->update(deltaTime);
+	for (Entity* ce : e->Children())
+	{
+		UpdateEntity(ce, deltaTime);
 	}
 }
