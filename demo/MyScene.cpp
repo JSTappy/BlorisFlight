@@ -15,10 +15,6 @@ MyScene::~MyScene()
 
 void MyScene::update(float deltaTime)
 {
-	if (input()->GetKeyDown(Space))
-	{
-		std::cout << "you work" << std::endl;
-		player->position -= glm::vec3(100.0f, 0.0f, 0.0f) * deltaTime;
-		player->rotation += 7.0f * deltaTime;
-	}
+	player->position -= glm::vec3(100.0f, 0.0f, 0.0f) * deltaTime;
+	player->rotation += 7.0f * deltaTime;
 }

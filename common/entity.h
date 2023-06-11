@@ -9,8 +9,6 @@
 #include <vector>
 #include <common/sprite.h>
 #include <common/config.h>
-#include <common/inputmanager.h>
-#include <common/keyconfig.h>
 #include <glm/glm.hpp>
 
 class Entity
@@ -20,8 +18,6 @@ public:
 	virtual ~Entity(); //destructor
 
 	virtual void update(float deltaTime) = 0; //update
-
-	InputManager* input() { return _input; };
 
 	void AddChild(Entity* c); //AddChild for Parent Child relations between entities
 	void RemoveChild(Entity* c);//Remove child for.. well, removing the child
@@ -41,8 +37,6 @@ public:
 protected:
 	std::vector<Entity*> children; //list of children 
 	Sprite* sprite; //sprite pointer sprite for the AddSprite method
-	InputManager* _input = InputManager::input();
-
 
 };
 #endif // !ENTITY_H

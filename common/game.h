@@ -16,8 +16,6 @@ public:
 
 	void Run(Scene* scene); //method for running the scene
 
-	InputManager* _inMan = InputManager::input(); //for instantiating the input
-
 	bool IsRunning() { return running; } //this is for getting the private boolean 'runnning'
 
 private:

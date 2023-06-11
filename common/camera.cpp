@@ -28,7 +28,12 @@ void Camera::computeViewMatrixFromInput(GLFWwindow* window, float deltaTime)
 	static glm::vec3 position = glm::vec3( 0, 0, 10 ); // Initial position : on +Z
 	float speed = 300.0f; // units / second
 
-	////// Move up
+	//shoot in log
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		std::cout << "shoot" << std::endl;
+	}
+
+	//// Move up
 	//if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
 	//	position += up * deltaTime * speed;
 	//}

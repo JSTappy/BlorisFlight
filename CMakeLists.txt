@@ -79,7 +79,6 @@ add_library(common # ar rcs libcommon.a
 	common/entity.cpp
 	common/inputmanager.h
 	common/inputmanager.cpp
-	common/keyconfig.h
 )
 
 # Demo
