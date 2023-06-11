@@ -6,24 +6,52 @@ MyScene::MyScene() : Scene()
 	player->AddSprite("assets/kingkong.tga");
 	player->position = glm::vec3(200.0f, 300.0f, 0.0f);
 	this->AddChild(player);
+
+
+	spawner = new Spawner();
+	spawner->AddSprite("assets/rgba.tga");
+	spawner->position = glm::vec3(2000.0f, 300.0f, 0.0f);
+	spawners.push_back(spawner);
+	this->AddChild(spawner);
 }
 
 MyScene::~MyScene()
 {
-	
+	this->RemoveChild(player);
+	this->RemoveChild(spawner);
+
+	delete player;
+	delete spawner;
 }
 
 void MyScene::update(float deltaTime)
 {
 	for (int i = player->bullets.size() - 1; i >= 0; i--) { // backwards!!!
-		Bullet* bullet = player->bullets[i]; // make the player bullets list into a local variable so its easier to type out
-		if (bullet != nullptr)
-		{
-			if (bullet->position.x > WIDTH || bullet->position.x < 0 || bullet->position.y < 0 || bullet->position.y > HEIGHT) {
-				bullet->dead = true;
+		Bullet* bullet = player->bullets[i]; 
+		for (int e = spawners.size() - 1; e >= 0; e--) {
+			for (int i = spawners[e]->enemies.size() - 1; i >= 0; i--) {
+				Enemy* enemy = spawners[e]->enemies[i]; 
+				
+				glm::vec2 enemypos(enemy->position.x, enemy->position.y);
+				glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
+				float dyingDistance = 128.0f;
+
+				if (enemy != nullptr) {
+					if (bullet->position.x > WIDTH || bullet->position.x < 0 || bullet->position.y < 0 || bullet->position.y > HEIGHT) {
+ 						bullet->dead = true;
+					}
+					
+					if (glm::distance(enemypos, bulletpos) < dyingDistance)
+					{
+						bullet->dead = true;
+						this->RemoveChild(enemy);
+						delete enemy;
+						enemy = nullptr;
+						spawners[e]->enemies.erase(spawners[e]->enemies.begin() + i);
+					}
+				}
 			}
 		}
-		//remove the bullets from the scene and the memory
 		if (bullet->dead && bullet != nullptr) {
 			this->RemoveChild(bullet);
 			delete bullet;
@@ -31,4 +59,5 @@ void MyScene::update(float deltaTime)
 			player->bullets.erase(player->bullets.begin() + i);
 		}
 	}
+
 }

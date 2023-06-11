@@ -32,8 +32,14 @@ void Player::update(float deltaTime)
 	{
 		bullet = new Bullet();
 		bullet->position = this->position;
+		bullet->speedx = 300.0f;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
-		std::cout << "Shoot" << std::endl;
+
+		Bullet* bullet2 = new Bullet();
+		bullet2->position = this->position;
+		bullet2->speedx = -300.0f;
+		bullets.push_back(bullet2);
+		this->parent->AddChild(bullet2);
 	}
 }

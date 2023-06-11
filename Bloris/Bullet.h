@@ -11,6 +11,9 @@ public:
 	Bullet();
 	virtual ~Bullet();
 
+	float speedx;
+	float speedy;
+
 	virtual void update(float deltaTime);
 	bool dead;
 
