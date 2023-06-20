@@ -101,7 +101,10 @@ add_executable(demo # g++ demo/demo.cpp -o demo
 	Bloris/Spawner.h
 	Bloris/EasyBird.cpp
 	Bloris/EasyBird.h
-
+	Bloris/Boss.cpp
+	Bloris/Boss.h
+	Bloris/LaserBeam.cpp
+	Bloris/LaserBeam.h
 )
 target_link_libraries(demo # g++ -lcommon
 	common
