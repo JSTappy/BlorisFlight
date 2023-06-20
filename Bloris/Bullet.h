@@ -13,6 +13,7 @@ public:
 
 	float speedx;
 	float speedy;
+	int damage;
 
 	virtual void update(float deltaTime);
 	bool dead;
