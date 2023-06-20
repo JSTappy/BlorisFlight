@@ -13,6 +13,8 @@ public:
 
 	virtual void update(float deltaTime);
 
+	int health;
+
 	std::vector <Bullet*> bullets;
 private:
 	Bullet* bullet;
