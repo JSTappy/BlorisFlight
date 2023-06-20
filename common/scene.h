@@ -5,7 +5,6 @@
 #include <common/camera.h>
 #include <common/sprite.h>
 #include <common/entity.h>
-#include <Bloris/TestEntity.h>
 
 class Scene : public Entity
 {

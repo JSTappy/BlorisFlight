@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "common/entity.h"
 #include "Bloris/Enemy.h"
+#include "Bloris/EasyBird.h"
 
  /// @brief The Spawner implementation.
 class Spawner : public Entity
@@ -19,7 +20,7 @@ public:
 	std::vector <Spawner*> spawners;
 
 private:
-	Enemy* enemy;
+	EasyBird* easybird;
 };
 
 #endif /* SPAWNER_H */

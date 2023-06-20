@@ -16,7 +16,7 @@ public:
 	std::vector <Bullet*> bullets;
 private:
 	Bullet* bullet;
-	Timer* timer;
+	Timer* timer = 0;
 };
 
 #endif /* ENEMY_H */

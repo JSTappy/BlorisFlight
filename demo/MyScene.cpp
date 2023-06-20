@@ -22,6 +22,9 @@ MyScene::~MyScene()
 
 	delete player;
 	delete spawner;
+
+	player = nullptr;
+	spawner = nullptr;
 }
 
 void MyScene::update(float deltaTime)
@@ -30,26 +33,30 @@ void MyScene::update(float deltaTime)
 		Bullet* bullet = player->bullets[i]; 
 		for (int e = spawners.size() - 1; e >= 0; e--) {
 			for (int i = spawners[e]->enemies.size() - 1; i >= 0; i--) {
-				Enemy* enemy = spawners[e]->enemies[i]; 
+				Enemy* enemy = spawners[e]->enemies[i];
 				
 				glm::vec2 enemypos(enemy->position.x, enemy->position.y);
 				glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
-				float dyingDistance = 128.0f;
+				float dyingDistance = 64.0f;
 
-				if (enemy != nullptr) {
 					if (bullet->position.x > WIDTH || bullet->position.x < 0 || bullet->position.y < 0 || bullet->position.y > HEIGHT) {
  						bullet->dead = true;
 					}
 					
-					if (glm::distance(enemypos, bulletpos) < dyingDistance)
+					if (enemy->health <= 0)
 					{
-						bullet->dead = true;
 						this->RemoveChild(enemy);
 						delete enemy;
 						enemy = nullptr;
 						spawners[e]->enemies.erase(spawners[e]->enemies.begin() + i);
+						return;
 					}
-				}
+					if (glm::distance(enemypos, bulletpos) < dyingDistance)
+					{
+						bullet->dead = true;
+						enemy->health -= bullet->damage;
+						std::cout << enemy->health << std::endl;
+					}
 			}
 		}
 		if (bullet->dead && bullet != nullptr) {
