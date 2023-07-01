@@ -9,6 +9,8 @@ public:
 	TestEntity(); //constructor
 	~TestEntity(); //destructor
 
+	void ChangeSprite(const std::string& imagepath); //constructor
+
 	virtual void update(float deltaTime); //update
 
 private:

@@ -14,7 +14,7 @@ int main(void)
 		game.Run(myscene);
 	}
 	// Check if the ESC key was pressed or the window was closed in the IsRunning Function
-	while (game.IsRunning());
+	while (!myscene->getPlayer()->dead && game.IsRunning());
 
 	delete myscene;
 

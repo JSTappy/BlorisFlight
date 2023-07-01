@@ -8,6 +8,8 @@
 #include "Bloris/Player.h"
 #include "Bloris/Enemy.h"
 #include "Bloris/Spawner.h"
+#include "Bloris/TestEntity.h"
+#include "Bloris/Button.h"
 
 class MyScene : public Scene
 {
@@ -19,9 +21,31 @@ public:
 
 	std::vector <Enemy*> enemies;
 	std::vector <Spawner*> spawners;
+	std::vector <TestEntity*> buttons;
+	Player* getPlayer() { return player; };
 
 private:
+
+	TestEntity* redButton;
+	TestEntity* redDigit;
+
+	TestEntity* greenButton;
+	TestEntity* greenDigit;
+
+	TestEntity* blueButton;
+	TestEntity* blueDigit;
+
+	TestEntity* yellowButton;
+	TestEntity* yellowDigit;
+
+	TestEntity* pinkButton;
+	TestEntity* pinkDigit;
+
+	TestEntity* purpleButton;
+	TestEntity* purpleDigit;
+
 	Player* player;
+
 	Spawner* spawner;
 
 

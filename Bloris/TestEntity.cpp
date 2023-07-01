@@ -2,7 +2,7 @@
 
 TestEntity::TestEntity() //Test to test
 {
-	std::cout << "ha je bestaat test entyti" << std::endl;
+	
 }
 
 TestEntity::~TestEntity()
@@ -12,4 +12,9 @@ TestEntity::~TestEntity()
 
 void TestEntity::update(float deltaTime)
 {
+}
+
+void TestEntity::ChangeSprite(const std::string& imagepath)
+{
+	this->sprite = new Sprite(imagepath);
 }

@@ -45,7 +45,7 @@ int Renderer::init()
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Open a window and create its OpenGL context
-	_window = glfwCreateWindow( WIDTH, HEIGHT, "Demo", NULL, NULL);
+	_window = glfwCreateWindow( WIDTH, HEIGHT, "Bloris Flight", NULL, NULL);
 	if( _window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window.\n" );
 		glfwTerminate();

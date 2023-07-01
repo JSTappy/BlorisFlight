@@ -15,6 +15,7 @@ Entity::Entity()
 Entity::~Entity()
 {
 	parent = nullptr;
+	sprite = nullptr;
 }
 
 void Entity::AddChild(Entity* c) //Add child method, if the parent is not a nullptr Remove the child from its old parent and make 'this' the new parent
