@@ -9,10 +9,7 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
-	delete _window;
-	delete _instance;
-	_window = nullptr;
-	_instance = nullptr;
+
 }
 
 void InputManager::InputUpdate(GLFWwindow* w) 

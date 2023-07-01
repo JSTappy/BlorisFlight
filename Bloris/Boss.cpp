@@ -24,18 +24,7 @@ Boss::Boss()
 
 Boss::~Boss()
 {
-	delete
-	timer,
-	attack1,
-	attack2,
-	attack3,
-	attack4;
-	timer = nullptr;
-	attack1 = nullptr;
-	attack2 = nullptr;
-	attack3 = nullptr;
-	attack4 = nullptr;
-	
+
 }
 
 void Boss::update(float deltaTime)

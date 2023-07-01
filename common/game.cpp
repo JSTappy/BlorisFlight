@@ -6,8 +6,6 @@ Game::Game()
 }
 Game::~Game()
 {
-	delete _inMan;
-	_inMan = nullptr;
 }
 
 void Game::Run(Scene* scene)

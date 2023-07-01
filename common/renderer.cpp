@@ -28,8 +28,6 @@ Renderer::~Renderer()
 	glDeleteProgram(_programID);
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();
-	delete _camera;
-	_camera = nullptr;
 }
 
 int Renderer::init()

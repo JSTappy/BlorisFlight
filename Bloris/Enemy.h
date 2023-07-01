@@ -18,6 +18,8 @@ public:
 	std::vector <Bullet*> bullets;
 private:
 	Bullet* bullet;
+	Timer* timer = 0;
+	Timer* hitdelay = 0;
 };
 
 #endif /* ENEMY_H */
