@@ -17,6 +17,7 @@ int main(void)
 	while (!myscene->getPlayer()->dead && game.IsRunning());
 
 	delete myscene;
+	myscene = nullptr;
 
 	return 0;
 }

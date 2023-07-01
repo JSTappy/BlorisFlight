@@ -19,4 +19,5 @@ Scene::~Scene()
 
 	// Delete camera
 	delete _camera;
+	_camera = nullptr;
 }

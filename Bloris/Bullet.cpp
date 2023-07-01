@@ -2,7 +2,7 @@
 
 Bullet::Bullet()
 {
-	this->AddSprite("assets/Bullet.tga");
+	this->AddSprite("assets/player/bullet.tga");
 	scale = glm::vec3(0.5f, 0.5f, 0.5f);
 	dead = false;
 	speedx = 0;

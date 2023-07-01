@@ -7,7 +7,7 @@ TestEntity::TestEntity() //Test to test
 
 TestEntity::~TestEntity()
 {
-
+	
 }
 
 void TestEntity::update(float deltaTime)

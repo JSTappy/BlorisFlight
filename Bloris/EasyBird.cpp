@@ -4,14 +4,15 @@ EasyBird::EasyBird()
 {
 	this->AddSprite("assets/easybird/enemy1.tga");
 	timer = new Timer();
-	health = 50;
+	health = 150;
 	this->AddChild(timer);
 	damaged = false;
 }
 
 EasyBird::~EasyBird()
 {
-
+	delete timer;
+	timer = nullptr;
 }
 
 void EasyBird::update(float deltaTime)
@@ -30,12 +31,11 @@ void EasyBird::update(float deltaTime)
 
 	if (timer->Seconds() > 3)
 	{
-		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();
-		bullet->AddSprite("assets/enemybullet.tga");
+		bullet->AddSprite("assets/easybird/enemybullet.tga");
 		bullet->position = this->position;
 		bullet->scale = glm::vec3(2, 2, 2);
-		bullet->speedx = -300.0f;
+		bullet->speedx = -200.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);

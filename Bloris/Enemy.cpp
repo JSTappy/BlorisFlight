@@ -8,7 +8,8 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
-
+	delete bullet;
+	bullet = nullptr;
 }
 
 void Enemy::update(float deltaTime)

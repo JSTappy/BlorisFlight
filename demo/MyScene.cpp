@@ -78,7 +78,8 @@ MyScene::MyScene() : Scene()
 
 MyScene::~MyScene()
 {
-
+	spawners.clear();
+	enemies.clear();
 }
 
 void MyScene::update(float deltaTime)

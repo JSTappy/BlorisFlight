@@ -2,6 +2,7 @@
 
 Spawner::Spawner()
 {
+	srand(time(NULL));
 	easybird = nullptr;
 	boss = nullptr;
 	bossActive = false;
@@ -10,14 +11,18 @@ Spawner::Spawner()
 
 Spawner::~Spawner()
 {
-
+	delete easybird;
+	delete boss;
+	easybird = nullptr;
+	boss = nullptr;
+	enemies.clear();
+	spawners.clear();
 }
 
 void Spawner::update(float deltaTime)
 {
-	if (killed == 2 && !bossActive)
+	if (killed == 24 && !bossActive)
 	{
-		std::cout << "SPAWN BOSS WIEEE WOOO" << std::endl;
 		SpawnBoss();
 		bossActive = true;
 	}
@@ -29,11 +34,14 @@ void Spawner::update(float deltaTime)
 
 void Spawner::SpawnEnemies()
 {
-		glm::vec3 random = glm::vec3(0, rand() % HEIGHT/100,0); //Random position 
-		easybird = new EasyBird();
-		this->parent->AddChild(easybird);
-		enemies.push_back(easybird);
-		easybird->position = this->position + random;
+	float minHeight = -300.0f;  // Minimum height for spawning
+	float maxHeight = 300.0f; // Maximum height for spawning
+	float randomHeight = minHeight + static_cast<float>(rand()) / (RAND_MAX / (maxHeight - minHeight));
+
+	easybird = new EasyBird();
+	easybird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
+	this->parent->AddChild(easybird);
+	enemies.push_back(easybird);
 }
 void Spawner::SpawnBoss()
 {
