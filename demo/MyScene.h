@@ -9,7 +9,6 @@
 #include "Bloris/Enemy.h"
 #include "Bloris/Spawner.h"
 #include "Bloris/TestEntity.h"
-#include "Bloris/Button.h"
 
 class MyScene : public Scene
 {
@@ -29,8 +28,8 @@ private:
 	TestEntity* redButton;
 	TestEntity* redDigit;
 
-	TestEntity* greenButton;
-	TestEntity* greenDigit;
+	//TestEntity* greenButton;
+	//TestEntity* greenDigit;
 
 	TestEntity* blueButton;
 	TestEntity* blueDigit;

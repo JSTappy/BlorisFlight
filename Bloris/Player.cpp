@@ -2,17 +2,20 @@
 
 Player::Player()
 {
+	magicPoint = 0;
 	bulletoffset = glm::vec3(0, 40.0f, 0);
 	dead = false;
-	_fireRate = 0;
-	shootdelay = new Timer();
-	beamdelay = new Timer();
+	_fireRate = 1.0f;
 	_speed = 200.0f;
 	health = 3;
 	maxHealth = 3;
 	_level = 1;
 	_bulletspeed = 400;
 	_bulletdamage = 1;
+	
+	
+	shootdelay = new Timer();
+	beamdelay = new Timer();
 	this->AddChild(beamdelay);
 	this->AddChild(shootdelay);
 	beamdelay->StopTimer();
@@ -23,6 +26,8 @@ Player::~Player()
 {
 	shootdelay = nullptr;
 	beamdelay = nullptr;
+	bullets.clear();
+	
 }
 
 void Player::update(float deltaTime)
@@ -49,54 +54,40 @@ void Player::update(float deltaTime)
 	if (input()->GetKeyDown(KEY_Z))
 	{
 		UpgradeSpeed();
-		//std::cout << "----------------" << std::endl;
-		//std::cout << "SPD is now" << std::endl;
-		//std::cout << speed << std::endl;
-		//std::cout << "----------------" << std::endl;
 	}
 	if (input()->GetKeyDown(KEY_H))
 	{
 		UpgradeHitPoints();
-		//std::cout << "----------------" << std::endl;
-		//std::cout << "HP is now" << std::endl;
-		//std::cout << health << std::endl;
-		//std::cout << "----------------" << std::endl;
 	}
 	if (input()->GetKeyDown(KEY_Q))
 	{
 		UpgradeBulletDamage();
-		//std::cout << "----------------" << std::endl;
-		//std::cout << "BDMG is now" << std::endl;
-		//std::cout << bulletdamage << std::endl;
-		//std::cout << "----------------" << std::endl;
 	}
 	if (input()->GetKeyDown(KEY_E))
 	{
 		UpgradeBulletSpeed();
-		//std::cout << "----------------" << std::endl;
-		//std::cout << "BSPD is now" << std::endl;
-		//std::cout << bulletspeed << std::endl;
-		//std::cout << "----------------" << std::endl;
 	}
 	if (input()->GetKeyDown(KEY_X))
 	{
 		UpgradeBalloon();
-		//std::cout << "----------------" << std::endl;
-		//std::cout << "Upgraded Balloon to Level" << std::endl;
-		//std::cout << level << std::endl;
-		//std::cout << "----------------" << std::endl;
 	}
+	//if (input()->GetKeyDown(KEY_F))
+	//{
+	//	UpgradeFireRate();
+	//}
 
-	//Shooting bullets & LaserBeam
+	//Shooting bullets & LaserBeam	
+	//if (shootdelay->Seconds() >= _fireRate)
+	//{
 	if (input()->GetKeyDown(Space))
 	{
+		Shoot();
 		beamdelay->StartOverTimer();
-		Shoot();	
-		std::cout << beamdelay->Seconds() << std::endl;
+		//shootdelay->StartOverTimer();
 	}
 	if (input()->GetKey(Space))
 	{
-	/*	std::cout << beamdelay->Seconds() << std::endl;*/
+		/*	std::cout << beamdelay->Seconds() << std::endl;*/
 		if (beamdelay->Seconds() >= 1)
 		{
 			this->sprite = new Sprite("assets/pencils.tga");
@@ -106,19 +97,19 @@ void Player::update(float deltaTime)
 	{
 		beamdelay->StopTimer();
 		ShootBeam();
-		this->sprite = new Sprite("assets/Balloon.tga");
-
+		this->sprite = new Sprite("assets/player/Balloon.tga");
 	}
+	//}
 }
 
 void Player::ShootBeam()
 {
 	Bullet* sphere = new Bullet();
-	sphere->AddSprite("assets/Sphere.tga");
+	sphere->AddSprite("assets/player/Sphere.tga");
 	bulletoffset = glm::vec3(20.0f, 40.0f, 0);
 	sphere->position = this->position + bulletoffset;
 	sphere->speedx = 200;
-	sphere->damage = 1;
+	sphere->damage = _bulletdamage;
 	sphere->health = 100;
 	bullets.push_back(sphere);
 	this->parent->AddChild(sphere);
@@ -226,62 +217,101 @@ void Player::Shoot()
 }
 int Player::UpgradeBalloon() 
 {
-	if (_level == 4)
+	static int killsneeded = 1;
+	if (magicPoint >= killsneeded)
 	{
-		std::cout << "MAXED OUT BALLOON" << std::endl;
-		return _level;
+		if (_level == 4)
+		{
+			std::cout << "MAXED OUT BALLOON" << std::endl;
+			return _level;
+		}
+		magicPoint -= killsneeded;
+		killsneeded *= 2;
+		std::cout<<killsneeded<<std::endl;
+		_level += 1;
 	}
-	_level += 1;
 	return _level;
 }
 int Player::UpgradeBulletSpeed()
 {
-	if (_bulletspeed == 1000)
+	static int killsneeded = 1;
+	if (magicPoint >= killsneeded)
 	{
-		std::cout << "MAXED OUT BSPD" << std::endl;
-		return _bulletspeed;
+		if (_bulletspeed == 1000)
+		{
+			std::cout << "MAXED OUT BSPD" << std::endl;
+			return _bulletspeed;
+		}
+		magicPoint -= killsneeded;
+		killsneeded *= 2;
+		_bulletspeed += 100;
 	}
-	_bulletspeed += 100;
 	return _bulletspeed;
 }
+
 int Player::UpgradeBulletDamage()
 {
-	if (_bulletdamage == 6)
+	static int killsneeded = 1;
+	if (magicPoint >= killsneeded)
 	{
-		std::cout << "MAXED OUT BDMG" << std::endl;
-		return _bulletdamage;
+		if (_bulletdamage == 6)
+		{
+			std::cout << "MAXED OUT BDMG" << std::endl;
+			return _bulletdamage;
+		}
+		magicPoint -= killsneeded;
+		killsneeded *= 2;
+		std::cout << killsneeded << std::endl;
+		_bulletdamage += 1;
 	}
-	_bulletdamage += 1;
 	return _bulletdamage;
+
 }
-int Player::UpgradeFireRate()
-{
-	if (_fireRate == 6)
-	{
-		std::cout << "MAXED OUT FR" << std::endl;
-		return _fireRate;
-	}
-	_fireRate += 1;
-	return _fireRate;
-}
+//float Player::UpgradeFireRate()
+//{
+//	if (_fireRate == 0.2f)
+//	{
+//		std::cout << "MAXED OUT FR" << std::endl;
+//		_fireRate = 0.2f;
+//	}
+//	else
+//	{
+//		_fireRate -= 0.1f;
+//		std::cout << _fireRate << std::endl;
+//	}
+//
+//	return _fireRate;
+//}
 
 int Player::UpgradeHitPoints()
 {
-	if (maxHealth == 6)
+	static int killsneeded = 1;
+	if (magicPoint >= killsneeded)
 	{
-		std::cout << "MAXED OUT HP" << std::endl;
-		return maxHealth;
+		if (maxHealth == 6)
+		{
+			std::cout << "MAXED OUT HP" << std::endl;
+			return maxHealth;
+		}
+		magicPoint -= killsneeded;
+		killsneeded *= 2;
+		maxHealth += 1;
 	}
-	maxHealth += 1;
 	return maxHealth;
 }
-int Player::UpgradeSpeed()
+float Player::UpgradeSpeed()
 {
-	if (_speed == 500.0f)
+	static int killsneeded = 1;
+	if (magicPoint >= killsneeded)
 	{
-		std::cout << "MAXED OUT SPD" << std::endl;
-		return _speed;
+		if (_speed == 500.0f)
+		{
+			std::cout << "MAXED OUT SPD" << std::endl;
+			return _speed;
+		}
+		magicPoint -= killsneeded;
+		killsneeded *= 2;
+		_speed += 50.0f;
 	}
-	_speed += 50.0f;
 	return _speed;
 }

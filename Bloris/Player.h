@@ -20,7 +20,7 @@ public:
 	int Level() { return _level; };
 
 	glm::vec3 bulletoffset;
-
+	int magicPoint;
 
 	bool dead;
 	int health;
@@ -34,8 +34,8 @@ private:
 	
 	float _speed;
 	float _bulletspeed;
+	float _bulletdamage;
 	float _fireRate;
-	int _bulletdamage;
 	int _level;
 
 
@@ -49,11 +49,11 @@ private:
 
 	int UpgradeBulletDamage();
 
-	int UpgradeFireRate();
+	float UpgradeFireRate();
 
 	int UpgradeHitPoints();
 
-	int UpgradeSpeed();
+	float UpgradeSpeed();
 };
 
 #endif /* PLAYER_H */

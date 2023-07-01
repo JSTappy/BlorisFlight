@@ -4,13 +4,13 @@ MyScene::MyScene() : Scene()
 {
 	
 	player = new Player();
-	player->AddSprite("assets/Balloon.tga");
+	player->AddSprite("assets/player/Balloon.tga");
 	player->position = glm::vec3(200.0f, 300.0f, 0.0f);
 	this->AddChild(player);
 
 	spawner = new Spawner();
 	spawner->AddSprite("assets/rgba.tga");
-	spawner->position = glm::vec3(1350.0f, 300.0f, 0.0f);
+	spawner->position = glm::vec3(1280.0f, 360.0f, 0.0f);
 	spawners.push_back(spawner);
 	this->AddChild(spawner);
 
@@ -19,10 +19,10 @@ MyScene::MyScene() : Scene()
 	redButton->position = glm::vec3(75.0f, 675.0f, 0.0f);
 	this->AddChild(redButton);
 
-	greenButton = new TestEntity();
+	/*greenButton = new TestEntity();
 	greenButton->AddSprite("assets/buttons/greenbtn.tga");
 	greenButton->position = glm::vec3(150.0f, 675.0f, 0.0f);
-	this->AddChild(greenButton);
+	this->AddChild(greenButton);*/
 	
 
 	blueButton = new TestEntity();
@@ -50,10 +50,10 @@ MyScene::MyScene() : Scene()
 	redDigit->position = glm::vec3(95.0f, 660.0f, 0.0f);
 	this->AddChild(redDigit);
 
-	greenDigit = new TestEntity();
+	/*greenDigit = new TestEntity();
 	greenDigit->AddSprite("assets/buttons/1.tga");
 	greenDigit->position = glm::vec3(165.0f, 660.0f, 0.0f);
-	this->AddChild(greenDigit);
+	this->AddChild(greenDigit);*/
 
 	blueDigit = new TestEntity();
 	blueDigit->AddSprite("assets/buttons/1.tga");
@@ -104,7 +104,6 @@ void MyScene::update(float deltaTime)
 				if (glm::distance(enemypos, bulletpos) < 64) {
 					enemy->health -= bullet->damage;
 					bullet->health -= 1;
-					std::cout << enemy->health << std::endl;
 				}
 				if (bullet->health <= 0) {
 					bullet->dead = true;
@@ -140,7 +139,6 @@ void MyScene::update(float deltaTime)
 				if (glm::distance(playerpos, bulletpos) < 64) {
 					player->health -= bullet->damage;
 					bullet->dead = true;
-					std::cout << player->health << std::endl;
 				}
 				if (bullet->health <= 0) {
 					bullet->dead = true;
@@ -149,11 +147,11 @@ void MyScene::update(float deltaTime)
 
 			if (enemy->health <= 0) {
 				spawner->killed += 1;
-				std::cout << spawner->killed << std::endl;
 				this->RemoveChild(enemy);
 				delete enemy;
 				enemy = nullptr;
 				spawners[e]->enemies.erase(spawners[e]->enemies.begin() + i);
+				player->magicPoint += 1;
 				return;
 			}
 			if (enemy->position.x < 0) {
@@ -274,9 +272,32 @@ void MyScene::update(float deltaTime)
 		////////
 
 		//FireRate
-
+		//if (player->FireRate() == 0.7f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/2.tga");
+		//}
+		//if (player->FireRate() == 0.6f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/3.tga");
+		//}
+		//if (player->FireRate() == 0.5f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/4.tga");
+		//}
+		//if (player->FireRate() == 0.4f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/5.tga");
+		//}
+		//if (player->FireRate() == 0.3f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/6.tga");
+		//}
+		//if (player->FireRate() == 0.2f)
+		//{
+		//	greenDigit->ChangeSprite("assets/buttons/MX.tga");
+		//}
 		
-		if (spawner->killed)
+		if (spawner->killed == 25)
 		{
 			TestEntity* winScreen = new TestEntity();
 			winScreen->AddSprite("assets/boss/WinScreen.tga");
