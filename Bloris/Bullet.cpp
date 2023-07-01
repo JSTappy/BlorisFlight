@@ -2,12 +2,13 @@
 
 Bullet::Bullet()
 {
-	this->AddSprite("assets/rgba.tga");
+	this->AddSprite("assets/Bullet.tga");
 	scale = glm::vec3(0.5f, 0.5f, 0.5f);
 	dead = false;
 	speedx = 0;
 	speedy = 0;
 	damage = 1;
+	health = 1;
 }
 
 Bullet::~Bullet()
