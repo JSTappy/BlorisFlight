@@ -13,6 +13,10 @@ public:
 
 private:
 	Timer* timer;
+	Timer* attack1;
+	Timer* attack2;
+	Timer* attack3;
+	Timer* attack4;
 	bool damaged;
 	bool damaged2;
 };
