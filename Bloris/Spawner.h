@@ -5,6 +5,7 @@
 #include "common/entity.h"
 #include "Bloris/Enemy.h"
 #include "Bloris/EasyBird.h"
+#include "Bloris/Boss.h"
 
  /// @brief The Spawner implementation.
 class Spawner : public Entity
@@ -15,12 +16,16 @@ public:
 
 	virtual void update(float deltaTime);
 	void SpawnEnemies();
-	std::vector <Enemy*> enemies;
+	void SpawnBoss();
 
+	int killed;
+	bool bossActive;
+	std::vector <Enemy*> enemies;
 	std::vector <Spawner*> spawners;
 
 private:
 	EasyBird* easybird;
+	Boss* boss;
 };
 
 #endif /* SPAWNER_H */
