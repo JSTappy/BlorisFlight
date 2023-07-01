@@ -14,7 +14,6 @@ public:
 private:
 	Timer* timer;
 	bool damaged;
-	bool damaged2;
 };
 
 #endif /* EASYBIRD_H */

@@ -13,5 +13,5 @@ Enemy::~Enemy()
 
 void Enemy::update(float deltaTime)
 {
-	
+
 }
