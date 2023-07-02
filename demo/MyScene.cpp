@@ -10,7 +10,7 @@ MyScene::MyScene() : Scene()
 
 	spawner = new Spawner();
 	spawner->AddSprite("assets/rgba.tga");
-	spawner->position = glm::vec3(1280.0f, 360.0f, 0.0f);
+	spawner->position = glm::vec3(1400.0f, 360.0f, 0.0f);
 	spawners.push_back(spawner);
 	this->AddChild(spawner);
 

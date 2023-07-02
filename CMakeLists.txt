@@ -101,6 +101,10 @@ add_executable(demo # g++ demo/demo.cpp -o demo
 	Bloris/Spawner.h
 	Bloris/EasyBird.cpp
 	Bloris/EasyBird.h
+	Bloris/MediumBird.cpp
+	Bloris/MediumBird.h
+	Bloris/HardBird.cpp
+	Bloris/HardBird.h
 	Bloris/Boss.cpp
 	Bloris/Boss.h
 )

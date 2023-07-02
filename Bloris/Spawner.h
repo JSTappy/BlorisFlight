@@ -5,6 +5,8 @@
 #include "common/entity.h"
 #include "Bloris/Enemy.h"
 #include "Bloris/EasyBird.h"
+#include "Bloris/MediumBird.h"
+#include "Bloris/HardBird.h"
 #include "Bloris/Boss.h"
 
  /// @brief The Spawner implementation.
@@ -25,6 +27,8 @@ public:
 
 private:
 	EasyBird* easybird;
+	MediumBird* mediumbird;
+	HardBird* hardbird;
 	Boss* boss;
 };
 

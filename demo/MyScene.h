@@ -20,7 +20,6 @@ public:
 
 	std::vector <Enemy*> enemies;
 	std::vector <Spawner*> spawners;
-	std::vector <TestEntity*> buttons;
 	Player* getPlayer() { return player; };
 
 private:

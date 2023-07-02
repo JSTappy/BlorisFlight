@@ -1,20 +1,20 @@
-#include <Bloris/EasyBird.h>
+#include <Bloris/HardBird.h>
 
-EasyBird::EasyBird()
+HardBird::HardBird()
 {
-	this->AddSprite("assets/easybird/enemy1.tga");
+	this->AddSprite("assets/kingkong.tga");
 	timer = new Timer();
 	health = 50;
 	this->AddChild(timer);
 	damaged = false;
 }
 
-EasyBird::~EasyBird()
+HardBird::~HardBird()
 {
 
 }
 
-void EasyBird::update(float deltaTime)
+void HardBird::update(float deltaTime)
 {
 	if (this->health == 4 && !damaged)
 	{
@@ -28,7 +28,7 @@ void EasyBird::update(float deltaTime)
 		damaged = false;
 	}
 
-	if (timer->Seconds() > 3)
+	if (timer->Seconds() > 0.5)
 	{
 		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();
