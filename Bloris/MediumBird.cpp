@@ -8,7 +8,6 @@ MediumBird::MediumBird()
 	health = 50;
 	this->AddChild(shotdelay);
 	this->AddChild(timer);
-	damaged = false;
 }
 
 MediumBird::~MediumBird()
@@ -19,7 +18,7 @@ MediumBird::~MediumBird()
 void MediumBird::update(float deltaTime)
 {
 
-	if (shotdelay->Seconds() > 0.9)
+	if (shotdelay->Seconds() > 1.3)
 	{
 		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();

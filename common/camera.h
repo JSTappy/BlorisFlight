@@ -7,21 +7,45 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // glm::lookAt()
 
+ /// @brief The Camera Class for a Camera in the scene
 class Camera
 {
 public:
-	Camera(); //constructor
-	virtual ~Camera(); //destructor
+	/// @brief constructor
+	Camera();
 
+	/// @brief destructor
+	virtual ~Camera(); 
+
+	/// @brief Computing the viewmatrix form input
+	/// @param window, deltaTime
+	/// @return void
 	void computeViewMatrixFromInput(GLFWwindow* window, float deltaTime); 
-	glm::mat4 getViewMatrix() { return _viewMatrix; };  //this is for getting the private member '_viewMatrix'
-	glm::mat4 getProjectionMatrix() { return _projectionMatrix; };  //this is for getting the private member '_projectionMatrix'
-	glm::vec3 getCursor() { return _cursor; };  //this is for getting the private member '_cursor'
+
+	/// @brief _viewMatrix getter
+	/// @return _viewmatrix
+	glm::mat4 getViewMatrix() { return _viewMatrix; };  
+
+	/// @brief _projectionMatrix getter
+	/// @return _projectionMatrix
+	glm::mat4 getProjectionMatrix() { return _projectionMatrix; }; 
+
+	/// @brief _cursor getter
+	/// @return _cursor
+	glm::vec3 getCursor() { return _cursor; };  
+
+
 
 private:
-	glm::mat4 _viewMatrix; //private member '_viewMatrix'
-	glm::mat4 _projectionMatrix; // private member '_projectionMatrix'
-	glm::vec3 _cursor; // private member '_cursor'
+	/// @brief The view Matrix of the camera
+	glm::mat4 _viewMatrix; 
+
+	/// @brief The projection Matrix of the camera
+	glm::mat4 _projectionMatrix; 
+
+	/// @brief The Cursor
+	glm::vec3 _cursor;
+
 };
 
 #endif

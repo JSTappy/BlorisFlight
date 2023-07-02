@@ -3,29 +3,29 @@
 Player::Player()
 {
 	magicPoint = 0;
+	
 	bulletoffset = glm::vec3(0, 40.0f, 0);
+	
 	dead = false;
-	_fireRate = 1.0f;
-	_speed = 200.0f;
-	health = 3;
+	
 	maxHealth = 3;
+	health = 3;
+	
+	
+	_speed = 200.0f;
 	_level = 1;
 	_bulletspeed = 400;
 	_bulletdamage = 1;
 	
 	
-	shootdelay = new Timer();
-	beamdelay = new Timer();
-	this->AddChild(beamdelay);
-	this->AddChild(shootdelay);
-	beamdelay->StopTimer();
-	shootdelay->StopTimer();
+	sphereDelay = new Timer();
+	this->AddChild(sphereDelay);
+	sphereDelay->StopTimer();
 }
 
 Player::~Player()
 {
-	shootdelay = nullptr;
-	beamdelay = nullptr;
+	sphereDelay = nullptr;
 	bullets.clear();
 	
 }
@@ -82,20 +82,20 @@ void Player::update(float deltaTime)
 	if (input()->GetKeyDown(Space))
 	{
 		Shoot();
-		beamdelay->StartOverTimer();
+		sphereDelay->StartOverTimer();
 		//shootdelay->StartOverTimer();
 	}
 	if (input()->GetKey(Space))
 	{
 		/*	std::cout << beamdelay->Seconds() << std::endl;*/
-		if (beamdelay->Seconds() >= 1)
+		if (sphereDelay->Seconds() >= 1)
 		{
 			this->sprite = new Sprite("assets/pencils.tga");
 		}
 	}
-	if (input()->GetKeyUp(Space) && beamdelay->Seconds() >= 1)
+	if (input()->GetKeyUp(Space) && sphereDelay->Seconds() >= 1)
 	{
-		beamdelay->StopTimer();
+		sphereDelay->StopTimer();
 		ShootBeam();
 		this->sprite = new Sprite("assets/player/Balloon.tga");
 	}

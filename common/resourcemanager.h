@@ -1,3 +1,14 @@
+/**
+ * @file resourcemanager.h
+ *
+ * @brief The resourcemanager header file.
+ *
+ *
+ * - Copyright 2023 Joas Sahetapy
+ *
+ */
+
+
 #ifndef RESOURCEMANAGER_H
 #define RESOURCEMANAGER_H
 
@@ -6,16 +17,26 @@
 #include <common/sprite.h>
 #include <GL/glew.h>
 
+ /// @brief The Resourcemanager Class is for managing the sprites and making sure they are loaded in correctly.
 class ResourceManager
 {
 public:
-	ResourceManager();//constructor
-	virtual ~ResourceManager(); //destructor
+	///@brief constructor
+	ResourceManager(); 
 
-	Sprite* GetTarga(const std::string& fileName); //Get Targa Method
+	/// @brief destructor
+	virtual ~ResourceManager(); 
+
+	/// @brief Method for getting targas
+	/// @param fileName the filename
+	/// @return filename
+	Sprite* GetTarga(const std::string& fileName); 
+
 
 private:
-	std::map<std::string, Sprite*> _targas; //list of sprite pointers
+	/// @brief list of sprites
+	std::map<std::string, Sprite*> _targas; 
+
 };
 
 #endif // !RESOURCEMANAGER_H

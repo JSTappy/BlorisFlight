@@ -8,29 +8,62 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+ /// @brief The Inputmanager class handles getting the keyboard keys.
 class InputManager
 {
 public:
-	InputManager();//constructor
-	virtual ~InputManager(); //destructor
+	/// @brief constructor
+	InputManager(); 
 
+	/// @brief destructor
+	virtual ~InputManager(); 
+
+	/// @brief public input instance
 	static InputManager* input();
 
-	void InputUpdate(GLFWwindow* w); // update for getting the for loop going
+	/// @brief for updating the input
+	/// @param w the window you want to register the input from
+	/// @return w
+	void InputUpdate(GLFWwindow* w); 
 
+	/// @brief GetKey for looking if the key keeps being pressed
+	/// @param k the key currently being held down
+	/// @return k
 	bool GetKey(int k); 
+
+	/// @brief GetKeyDown for looking if the key has been pressed once
+	/// @param k the key that has been pressed once
+	/// @return k
 	bool GetKeyDown(int k); 
+
+	/// @brief GetKeyUp for looking if the key has been released
+	/// @param k the key that has released
+	/// @return k
 	bool GetKeyUp(int k); 
 
-private:
-	GLFWwindow* _window; 
-	static InputManager* _instance; 
-	void _handleKey(int key); //for checking if the keys are pressed
 
-	//the integers are for the keys because keys are integers and the bools are for checking if it is pressed
+private:
+	/// @brief Window the input is registered in
+	GLFWwindow* _window; 
+
+	/// @brief instance of InputManager
+	static InputManager* _instance; 
+
+	/// @brief for checking what keys are being pressed
+	/// @param key the key that is supposed to be handled
+	/// return void
+	void _handleKey(int key); 
+
+
+	/// @brief keys
 	std::map<int, bool> _keys;
+
+	/// @brief keysDown
 	std::map<int, bool> _keysDown;
+
+	/// @brief keysUp
 	std::map<int, bool> _keysUp; 
+
 
 };
 

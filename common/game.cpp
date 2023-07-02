@@ -2,10 +2,11 @@
 
 Game::Game()
 {
-
+	running = false;
 }
 Game::~Game()
 {
+
 }
 
 void Game::Run(Scene* scene)

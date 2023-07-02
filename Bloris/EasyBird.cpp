@@ -6,7 +6,6 @@ EasyBird::EasyBird()
 	shotdelay = new Timer();
 	health = 50;
 	this->AddChild(shotdelay);
-	damaged = false;
 }
 
 EasyBird::~EasyBird()
@@ -16,18 +15,6 @@ EasyBird::~EasyBird()
 
 void EasyBird::update(float deltaTime)
 {
-	if (this->health == 4 && !damaged)
-	{
-		this->sprite = new Sprite("assets/easybird/enemy1dmg.tga");
-		damaged = true;
-		
-	}
-	if (this->health == 1 && damaged)
-	{
-		this->sprite = new Sprite("assets/easybird/enemy1oh.tga");
-		damaged = false;
-	}
-
 	if (shotdelay->Seconds() > 3)
 	{
 		std::cout << this->health << std::endl;

@@ -36,27 +36,27 @@ void Spawner::SpawnEnemies()
 	float randomHeight = minHeight + static_cast<float>(rand()) / (RAND_MAX / (maxHeight - minHeight));
 
 
-	//if (killed  <= 8)
-	//{
-	//	easybird = new EasyBird();
-	//	easybird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
-	//	this->parent->AddChild(easybird);
-	//	enemies.push_back(easybird);
-	//}
-	//else if (killed > 8 && killed <= 16)
-	//{
+	if (killed  <= 8)
+	{
+		easybird = new EasyBird();
+		easybird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
+		this->parent->AddChild(easybird);
+		enemies.push_back(easybird);
+	}
+	else if (killed > 8 && killed <= 16)
+	{
 		mediumbird = new MediumBird();
 		mediumbird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
 		this->parent->AddChild(mediumbird);
 		enemies.push_back(mediumbird);
-	//}
-	//else if (killed > 16 && killed <= 24)
-	//{
-	//	hardbird = new HardBird();
-	//	hardbird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
-	//	this->parent->AddChild(hardbird);
-	//	enemies.push_back(hardbird);
-	//}
+	}
+	else if (killed > 16 && killed <= 24)
+	{
+		hardbird = new HardBird();
+		hardbird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
+		this->parent->AddChild(hardbird);
+		enemies.push_back(hardbird);
+	}
 }
 void Spawner::SpawnBoss()
 {

@@ -11,7 +11,6 @@ MyScene::MyScene() : Scene()
 	spawner = new Spawner();
 	spawner->AddSprite("assets/rgba.tga");
 	spawner->position = glm::vec3(1400.0f, 360.0f, 0.0f);
-	spawners.push_back(spawner);
 	this->AddChild(spawner);
 
 	redButton = new TestEntity();
@@ -91,9 +90,8 @@ void MyScene::update(float deltaTime)
 
 	for (int i = player->bullets.size() - 1; i >= 0; i--) { // backwards!!!
 		Bullet* bullet = player->bullets[i];
-		for (int e = spawners.size() - 1; e >= 0; e--) {
-			for (int i = spawners[e]->enemies.size() - 1; i >= 0; i--) {
-				Enemy* enemy = spawners[e]->enemies[i];
+			for (int i = spawner->enemies.size() - 1; i >= 0; i--) {
+				Enemy* enemy = spawner->enemies[i];
 
 				glm::vec2 enemypos(enemy->position.x, enemy->position.y);
 				glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
@@ -109,7 +107,6 @@ void MyScene::update(float deltaTime)
 					bullet->dead = true;
 				}
 			}
-		}
 		if (bullet->dead && bullet != nullptr) {
 			this->RemoveChild(bullet);
 			delete bullet;
@@ -118,9 +115,8 @@ void MyScene::update(float deltaTime)
 		}
 
 	}
-	for (int e = spawners.size() - 1; e >= 0; e--) {
-		for (int i = spawners[e]->enemies.size() - 1; i >= 0; i--) {
-			Enemy* enemy = spawners[e]->enemies[i];
+		for (int i = spawner->enemies.size() - 1; i >= 0; i--) {
+			Enemy* enemy = spawner->enemies[i];
 			for (int b = enemy->bullets.size() - 1; b >= 0; b--) {
 				Bullet* bullet = enemy->bullets[b];
 				glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
@@ -150,7 +146,7 @@ void MyScene::update(float deltaTime)
 				this->RemoveChild(enemy);
 				delete enemy;
 				enemy = nullptr;
-				spawners[e]->enemies.erase(spawners[e]->enemies.begin() + i);
+				spawner->enemies.erase(spawner->enemies.begin() + i);
 				player->magicPoint += 1;
 				return;
 			}
@@ -160,10 +156,9 @@ void MyScene::update(float deltaTime)
 				this->RemoveChild(enemy);
 				delete enemy;
 				enemy = nullptr;
-				spawners[e]->enemies.erase(spawners[e]->enemies.begin() + i);
+				spawner->enemies.erase(spawner->enemies.begin() + i);
 			}
 
-		}
 		//Leveling Up
 		if (player->Level() == 2)
 		{

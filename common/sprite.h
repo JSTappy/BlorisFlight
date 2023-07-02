@@ -5,42 +5,93 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
+/// @brief The Sprite class defines the vertexes, uv, width, height, texture and shader of a sprite
 class Sprite
 {
 public:
-	Sprite(const std::string& imagepath); //constructor but with a reference to the image path (assets/kingkong.tga) for example
-	virtual ~Sprite(); //destructor
+	/// @brief constructor 
+	/// @param imagepath the path to the image
+	Sprite(const std::string& imagepath);
 
-	GLuint vertexbuffer() { return _vertexbuffer; }; //this is for getting the GLuint '_vertexbuffer'
-	GLuint uvbuffer() { return _uvbuffer; }; //this is for getting the private GLuint '_uvbuffer'
-	GLuint gettexture() { return _texture; }; //this is for getting the private GLuint '_texture'
-	unsigned int width() { return _width; }; //this is for getting the private uint '_width'
-	unsigned int height() { return _height; }; //this is for getting the private uint '_height'
-
-	void SetUp(GLuint vb, GLuint uvb, GLuint texture, unsigned int width ,unsigned int height); //this method is for initializing the sprite
-	std::string TextureName() { return _texturename; }; //this is for getting the private string '_texturename'
-
-	//position rotation scale
-	glm::vec3 position;
-	glm::vec3 scale;
-	float rotation;
-
-	void createFromBuffer(); //this method is for defining the vertex and uv buffer data
+	/// @brief destructor
+	virtual ~Sprite();
 
 
-	GLuint loadTGA(const std::string& imagepath); //method for loading Targas
+	/// @brief _vertexbuffer getter
+	/// @return _vertexbuffer
+	GLuint vertexbuffer() { return _vertexbuffer; }; 
+
+	/// @brief _uvbuffer getter
+	/// @return _uvbuffer
+	GLuint uvbuffer() { return _uvbuffer; }; 
+
+	/// @brief _texture getter
+	/// @return _texture
+	GLuint gettexture() { return _texture; }; 
+
+	/// @brief _width getter
+	/// @return _width
+	unsigned int width() { return _width; };
+
+	/// @brief _height getter
+	/// @return _height
+	unsigned int height() { return _height; }; 
+
+	/// @brief this method is for initializing the sprite
+	/// @param vb, uvb, texture, width, height Vertex buffer, UV buffer, Texture, width and height
+	/// @return void
+	void SetUp(GLuint vb, GLuint uvb, GLuint texture, unsigned int width ,unsigned int height); 
+
+	/// @brief _texturename getter
+	/// @return _texturename 
+	std::string TextureName() { return _texturename; }; 
+
+
+	/// @brief position
+	glm::vec3 position; 
+
+	/// @brief scale
+	glm::vec3 scale; 
+
+	/// @brief rotation
+	float rotation; 
+
+
+	/// @brief this method is for defining the vertex and uv buffer data
+	/// @return void
+	void createFromBuffer(); 
+
+
+	/// @brief method for loading Targas
+	/// @param imagepath the path to the image
+	/// return GLUint
+	GLuint loadTGA(const std::string& imagepath); 
+
 
 private:
+	/// @brief name of the texture
+	std::string _texturename; 
 
-	std::string _texturename; //private string texturename, you use this in renderer to know what targa to load. You use this together with the TextureName string
-	GLuint _vertexbuffer;  //GLuint _vertexbuffer
-	GLuint _uvbuffer; ///GLuint _uvbuffer for
-	GLuint _texture; ///GLuint '_vertexbuffer'
+	/// @brief this will determine the vertices of the sprite
+	GLuint _vertexbuffer;  
 
-	unsigned int _width; // this will be the sprite width
-	unsigned int _height; // this will be the sprite height
+	/// @brief this will determine the UV's of the sprite
+	GLuint _uvbuffer; 
 
-	bool setup = false; //this is a boolean to see if the initialisation has already been done, if true: then you cant setup anymore
+	/// @brief this will determine the texture of the sprite
+	GLuint _texture; 
+
+
+	/// @brief this will be the sprite width
+	unsigned int _width;
+
+	/// @brief this will be the sprite height
+	unsigned int _height; 
+
+
+	/// @brief this is a boolean to see if the initialisation has already been done
+	bool setup = false; 
+
 
 };
 

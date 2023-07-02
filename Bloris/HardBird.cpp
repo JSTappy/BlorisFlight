@@ -4,11 +4,8 @@ HardBird::HardBird()
 {
 	this->AddSprite("assets/kingkong.tga");
 	shotdelay = new Timer();
-	timer = new Timer();
 	health = 50;
 	this->AddChild(shotdelay);
-	this->AddChild(timer);
-	damaged = false;
 }
 
 HardBird::~HardBird()
@@ -18,17 +15,6 @@ HardBird::~HardBird()
 
 void HardBird::update(float deltaTime)
 {
-	if (this->health == 4 && !damaged)
-	{
-		this->sprite = new Sprite("assets/easybird/enemy1dmg.tga");
-		damaged = true;
-		
-	}
-	if (this->health == 1 && damaged)
-	{
-		this->sprite = new Sprite("assets/easybird/enemy1oh.tga");
-		damaged = false;
-	}
 
 	if (shotdelay->Seconds() > 0.5)
 	{
