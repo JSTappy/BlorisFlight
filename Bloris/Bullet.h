@@ -11,8 +11,7 @@ public:
 	Bullet();
 	virtual ~Bullet();
 
-	float speedx;
-	float speedy;
+	glm::vec2 velocity;
 	int damage;
 	int health;
 

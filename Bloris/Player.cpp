@@ -108,7 +108,7 @@ void Player::ShootBeam()
 	sphere->AddSprite("assets/player/Sphere.tga");
 	bulletoffset = glm::vec3(20.0f, 40.0f, 0);
 	sphere->position = this->position + bulletoffset;
-	sphere->speedx = 200;
+	sphere->velocity.x = 200;
 	sphere->damage = _bulletdamage;
 	sphere->health = 100;
 	bullets.push_back(sphere);
@@ -122,7 +122,7 @@ void Player::Shoot()
 	{
 		Bullet* bullet = new Bullet();
 		bullet->position = this->position + bulletoffset;
-		bullet->speedx = _bulletspeed;
+		bullet->velocity.x = _bulletspeed;
 		bullet->damage = _bulletdamage;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
@@ -132,8 +132,8 @@ void Player::Shoot()
 	{
 		Bullet* bullet = new Bullet();
 		bullet->position = this->position + bulletoffset;
-		bullet->speedx = _bulletspeed;
-		bullet->speedy = _bulletspeed / 2;
+		bullet->velocity.x = _bulletspeed;
+		bullet->velocity.y = _bulletspeed / 2;
 		bullet->damage = _bulletdamage;
 		bullet->health = 2;
 		bullets.push_back(bullet);
@@ -141,7 +141,7 @@ void Player::Shoot()
 
 		Bullet* bullet2 = new Bullet();
 		bullet2->position = this->position + bulletoffset;
-		bullet2->speedx = _bulletspeed;
+		bullet2->velocity.x = _bulletspeed;
 		bullet2->damage = _bulletdamage;
 		bullet2->health = 2;
 		bullets.push_back(bullet2);
@@ -151,8 +151,8 @@ void Player::Shoot()
 	{
 		Bullet* bullet = new Bullet();
 		bullet->position = this->position + bulletoffset;
-		bullet->speedx = _bulletspeed;
-		bullet->speedy = _bulletspeed /2;
+		bullet->velocity.x = _bulletspeed;
+		bullet->velocity.y = _bulletspeed /2;
 		bullet->damage = _bulletdamage;
 		bullet->health = 3;
 		bullets.push_back(bullet);
@@ -160,7 +160,7 @@ void Player::Shoot()
 
 		Bullet* bullet2 = new Bullet();
 		bullet2->position = this->position + bulletoffset;
-		bullet2->speedx = _bulletspeed;
+		bullet2->velocity.x = _bulletspeed;
 		bullet2->damage = _bulletdamage;
 		bullet2->health = 3;
 		bullets.push_back(bullet2);
@@ -168,8 +168,8 @@ void Player::Shoot()
 
 		Bullet* bullet3 = new Bullet();
 		bullet3->position = this->position + bulletoffset;
-		bullet3->speedx = _bulletspeed;
-		bullet3->speedy = -_bulletspeed /2;
+		bullet3->velocity.x = _bulletspeed;
+		bullet3->velocity.y = -_bulletspeed /2;
 		bullet3->damage = _bulletdamage;
 		bullet3->health = 3;
 		bullets.push_back(bullet3);
@@ -179,8 +179,8 @@ void Player::Shoot()
 	{
 		Bullet* bullet = new Bullet();
 		bullet->position = this->position + bulletoffset;
-		bullet->speedx = _bulletspeed;
-		bullet->speedy = _bulletspeed /2;
+		bullet->velocity.x = _bulletspeed;
+		bullet->velocity.y = _bulletspeed /2;
 		bullet->damage = _bulletdamage;
 		bullet->health = 5;
 		bullets.push_back(bullet);
@@ -188,7 +188,7 @@ void Player::Shoot()
 
 		Bullet* bullet2 = new Bullet();
 		bullet2->position = this->position + bulletoffset;
-		bullet2->speedx = _bulletspeed;
+		bullet2->velocity.x = _bulletspeed;
 		bullet2->damage = _bulletdamage;
 		bullet2->health = 5;
 		bullets.push_back(bullet2);
@@ -196,8 +196,8 @@ void Player::Shoot()
 
 		Bullet* bullet3 = new Bullet();
 		bullet3->position = this->position + bulletoffset;
-		bullet3->speedx = _bulletspeed;
-		bullet3->speedy = -_bulletspeed /2;
+		bullet3->velocity.x = _bulletspeed;
+		bullet3->velocity.y = -_bulletspeed /2;
 		bullet3->damage = _bulletdamage;
 		bullet3->health = 5;
 		bullets.push_back(bullet3);
@@ -206,7 +206,7 @@ void Player::Shoot()
 		Bullet* bullet4 = new Bullet();
 		bulletoffset = glm::vec3(-10.0f, 40.0f, 0);
 		bullet4->position = this->position + bulletoffset;
-		bullet4->speedx = -_bulletspeed;
+		bullet4->velocity.x = -_bulletspeed;
 		bullet4->damage = _bulletdamage;
 		bullet4->health = 5;
 		bullets.push_back(bullet4);
@@ -217,7 +217,7 @@ void Player::Shoot()
 }
 int Player::UpgradeBalloon() 
 {
-	static int killsneeded = 1;
+	static int killsneeded = 4;
 	if (magicPoint >= killsneeded)
 	{
 		if (_level == 4)
@@ -226,7 +226,7 @@ int Player::UpgradeBalloon()
 			return _level;
 		}
 		magicPoint -= killsneeded;
-		killsneeded *= 2;
+		killsneeded *= 1.5;
 		std::cout<<killsneeded<<std::endl;
 		_level += 1;
 	}
@@ -251,7 +251,7 @@ int Player::UpgradeBulletSpeed()
 
 int Player::UpgradeBulletDamage()
 {
-	static int killsneeded = 1;
+	static int killsneeded = 2;
 	if (magicPoint >= killsneeded)
 	{
 		if (_bulletdamage == 6)
@@ -260,7 +260,7 @@ int Player::UpgradeBulletDamage()
 			return _bulletdamage;
 		}
 		magicPoint -= killsneeded;
-		killsneeded *= 2;
+		killsneeded *= 1.5;
 		std::cout << killsneeded << std::endl;
 		_bulletdamage += 1;
 	}
@@ -288,16 +288,16 @@ int Player::UpgradeHitPoints()
 	static int killsneeded = 1;
 	if (magicPoint >= killsneeded)
 	{
-		if (maxHealth == 6)
+		if (health == 6)
 		{
 			std::cout << "MAXED OUT HP" << std::endl;
-			return maxHealth;
+			return health;
 		}
 		magicPoint -= killsneeded;
 		killsneeded *= 2;
-		maxHealth += 1;
+		health += 1;
 	}
-	return maxHealth;
+	return health;
 }
 float Player::UpgradeSpeed()
 {

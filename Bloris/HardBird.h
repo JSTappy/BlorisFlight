@@ -3,6 +3,7 @@
 
 #include <Bloris/Enemy.h>
 
+/// @brief The HardBird implementation.
 class HardBird : public Enemy
 {
 public:
@@ -12,6 +13,7 @@ public:
 	virtual void update(float deltaTime);
 
 private:
+	Timer* shotdelay;
 	Timer* timer;
 	bool damaged;
 };

@@ -12,7 +12,7 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	Timer* timer;
+	Timer* shotdelay;
 	bool damaged;
 };
 

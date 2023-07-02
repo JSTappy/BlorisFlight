@@ -1,6 +1,7 @@
 #ifndef BOSS_H
 #define BOSS_H
 
+/// 
 #include <Bloris/Enemy.h>
 
 class Boss : public Enemy

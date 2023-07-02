@@ -36,7 +36,7 @@ void Boss::update(float deltaTime)
 		bullet->position = this->position;
 		bullet->position.y = 100;
 		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->speedx = -200.0f;
+		bullet->velocity.x = -200.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
@@ -49,7 +49,7 @@ void Boss::update(float deltaTime)
 		glm::vec3 random = glm::vec3(0, rand() % HEIGHT / 20, 0); //Random position 
 		bullet->position = this->position + random;
 		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->speedx = -200.0f;
+		bullet->velocity.x = -200.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
@@ -62,7 +62,7 @@ void Boss::update(float deltaTime)
 		bullet->position = this->position;
 		bullet->position.y += 200;
 		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->speedx = -200.0f;
+		bullet->velocity.x = -200.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
