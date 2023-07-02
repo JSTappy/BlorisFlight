@@ -2,10 +2,10 @@
 
 HardBird::HardBird()
 {
-	this->AddSprite("assets/kingkong.tga");
+	this->AddSprite("assets/enemies/hardbird.tga");
 	shotdelay = new Timer();
 	timer = new Timer();
-	health = 200;
+	health = 250;
 	this->AddChild(shotdelay);
 	this->AddChild(timer);
 }
@@ -67,10 +67,10 @@ void HardBird::update(float deltaTime)
 	}
 	if (timer->Seconds() > 0)
 	{
-		this->position -= glm::vec3(150.0f, 200.0f, 0.0f) * deltaTime;
+		this->position -= glm::vec3(50.0f, 200.0f, 0.0f) * deltaTime;
 		return;
 	}
 	
 
-	this->position -= glm::vec3(200.0f, 0.0f, 0.0f) * deltaTime;
+	this->position -= glm::vec3(100.0f, 0.0f, 0.0f) * deltaTime;
 }

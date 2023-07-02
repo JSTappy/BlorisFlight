@@ -47,6 +47,7 @@ void Spawner::SpawnEnemies()
 	{
 		mediumbird = new MediumBird();
 		mediumbird->position = this->position + glm::vec3(0, randomHeight, 0); // Set random height
+		mediumbird->scale = glm::vec3(2, 2, 2);
 		this->parent->AddChild(mediumbird);
 		enemies.push_back(mediumbird);
 	}
