@@ -89,14 +89,14 @@ void Player::update(float deltaTime)
 		/*	std::cout << beamdelay->Seconds() << std::endl;*/
 		if (sphereDelay->Seconds() >= 1)
 		{
-			this->sprite = new Sprite("assets/pencils.tga");
+			this->sprite = new Sprite("assets/player/balloonc.tga");
 		}
 	}
 	if (input()->GetKeyUp(Space) && sphereDelay->Seconds() >= 1)
 	{
 		sphereDelay->StopTimer();
 		ShootBeam();
-		this->sprite = new Sprite("assets/player/Balloon.tga");
+		this->sprite = new Sprite("assets/player/balloon.tga");
 	}
 	//}
 }
@@ -104,7 +104,7 @@ void Player::update(float deltaTime)
 void Player::ShootBeam()
 {
 	Bullet* sphere = new Bullet();
-	sphere->AddSprite("assets/player/Sphere.tga");
+	sphere->AddSprite("assets/player/sphere.tga");
 	bulletoffset = glm::vec3(20.0f, 40.0f, 0);
 	sphere->position = this->position + bulletoffset;
 	sphere->velocity.x = 200;

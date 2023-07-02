@@ -326,7 +326,7 @@ void MyScene::update(float deltaTime)
 	if (spawner->killed == 25)
 	{
 		TestEntity* winScreen = new TestEntity();
-		winScreen->AddSprite("assets/boss/WinScreen.tga");
+		winScreen->AddSprite("assets/boss/winscreen.tga");
 		winScreen->position = glm::vec3(600.0f, 300.0f, 0.0f);
 		this->AddChild(winScreen);
 	}

@@ -2,7 +2,7 @@
 
 MediumBird::MediumBird()
 {
-	this->AddSprite("assets/pencils.tga");
+	this->AddSprite("assets/enemies/mediumbird.tga");
 	shotdelay = new Timer();
 	timer = new Timer();
 	health = 100;
@@ -22,7 +22,7 @@ void MediumBird::update(float deltaTime)
 	{
 		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();
-		bullet->AddSprite("assets/easybird/enemybullet.tga");
+		bullet->AddSprite("assets/enemies/enemybullet.tga");
 		bullet->position = this->position;
 		bullet->rotation = this->rotation;
 		bullet->scale = glm::vec3(2, 2, 2);

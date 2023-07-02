@@ -2,7 +2,7 @@
 
 EasyBird::EasyBird()
 {
-	this->AddSprite("assets/easybird/enemy1.tga");
+	this->AddSprite("assets/enemies/easybird.tga");
 	shotdelay = new Timer();
 	health = 50;
 	this->AddChild(shotdelay);
@@ -19,7 +19,7 @@ void EasyBird::update(float deltaTime)
 	{
 		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();
-		bullet->AddSprite("assets/easybird/enemybullet.tga");
+		bullet->AddSprite("assets/enemies/enemybullet.tga");
 		bullet->position = this->position;
 		bullet->scale = glm::vec3(2, 2, 2);
 		bullet->velocity.x = -300.0f;

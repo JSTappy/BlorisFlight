@@ -2,7 +2,7 @@
 
 Boss::Boss()
 {
-	this->AddSprite("assets/boss/PartyParty.tga");
+	this->AddSprite("assets/boss/partyparty.tga");
 	
 	timer = new Timer();
 	attack1 = new Timer();
@@ -24,8 +24,9 @@ void Boss::update(float deltaTime)
 	{
 		std::cout << "attack" << std::endl;
 		Bullet* bullet = new Bullet();
+		bullet->AddSprite("assets/enemies/enemybullet.tga");
 		bullet->position = this->position;
-		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+		bullet->scale = glm::vec3(2, 2, 2);
 		bullet->velocity.x = -300.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
