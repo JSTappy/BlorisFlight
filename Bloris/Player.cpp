@@ -8,7 +8,6 @@ Player::Player()
 	
 	dead = false;
 	
-	maxHealth = 3;
 	health = 3;
 	
 	

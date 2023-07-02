@@ -36,21 +36,6 @@ private:
 
 	/// @brief attack1
 	Timer* attack1;
-
-	/// @brief attack2
-	Timer* attack2;
-
-	/// @brief attack3
-	Timer* attack3;
-	 
-	/// @brief attack4
-	Timer* attack4;
-
-	/// @brief damaged
-	bool damaged;
-
-	/// @brief damaged
-	bool damaged2;
 };
 
 #endif /* BOSS_H */

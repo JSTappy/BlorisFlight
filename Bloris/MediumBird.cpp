@@ -5,7 +5,7 @@ MediumBird::MediumBird()
 	this->AddSprite("assets/pencils.tga");
 	shotdelay = new Timer();
 	timer = new Timer();
-	health = 50;
+	health = 100;
 	this->AddChild(shotdelay);
 	this->AddChild(timer);
 }

@@ -6,20 +6,11 @@ Boss::Boss()
 	
 	timer = new Timer();
 	attack1 = new Timer();
-	attack2 = new Timer();
-	attack3 = new Timer();
-	attack4 = new Timer();
 
 	health = 1000;
 
-	damaged = false;
-	damaged2 = false;
-
 	this->AddChild(timer);
 	this->AddChild(attack1);
-	this->AddChild(attack2);
-	this->AddChild(attack3);
-	this->AddChild(attack4);
 }
 
 Boss::~Boss()
@@ -29,48 +20,38 @@ Boss::~Boss()
 
 void Boss::update(float deltaTime)
 {
-	if (attack1->Seconds() > 2)
+	if (attack1->Seconds() > 0.69)
 	{
 		std::cout << "attack" << std::endl;
 		Bullet* bullet = new Bullet();
 		bullet->position = this->position;
-		bullet->position.y = 100;
 		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->velocity.x = -200.0f;
+		bullet->velocity.x = -300.0f;
 		bullet->health = 1;
 		bullets.push_back(bullet);
 		this->parent->AddChild(bullet);
 		attack1->StartOverTimer();
 	}
-	if (attack2->Seconds() > 5)
+	if (timer->Seconds() > 6)
 	{
-		std::cout << "Attack2" << std::endl;
-		Bullet* bullet = new Bullet();
-		glm::vec3 random = glm::vec3(0, rand() % HEIGHT / 20, 0); //Random position 
-		bullet->position = this->position + random;
-		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->velocity.x = -200.0f;
-		bullet->health = 1;
-		bullets.push_back(bullet);
-		this->parent->AddChild(bullet);
-		attack2->StartOverTimer();
+		this->position -= glm::vec3(0, 0, 0.0f) * deltaTime;
+		timer->StartOverTimer();
+		return;
 	}
-	if (attack3->Seconds() > 6)
+	if (timer->Seconds() > 3)
 	{
-		std::cout << "Attack3" << std::endl;
-		Bullet* bullet = new Bullet();
-		bullet->position = this->position;
-		bullet->position.y += 200;
-		bullet->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-		bullet->velocity.x = -200.0f;
-		bullet->health = 1;
-		bullets.push_back(bullet);
-		this->parent->AddChild(bullet);
-		attack3->StartOverTimer();
+		this->position -= glm::vec3(0, -150.0f, 0.0f) * deltaTime;
+		return;
 	}
+	if (timer->Seconds() > 0)
+	{
+		this->position -= glm::vec3(0, 150.0f, 0.0f) * deltaTime;
+	}
+
 
 	if (this->position.x >= 1000.0f)
 	{
 		this->position -= glm::vec3(100.0f, 0.0f, 0.0f) * deltaTime;
+		timer->StartTimer();
 	}
 }

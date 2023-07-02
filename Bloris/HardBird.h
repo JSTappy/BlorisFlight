@@ -32,6 +32,7 @@ public:
 private:
 	/// @brief delay between shots of the birds
 	Timer* shotdelay;
+	Timer* timer;
 };
 
 #endif /* HARDBIRD_H */

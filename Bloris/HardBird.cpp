@@ -4,8 +4,10 @@ HardBird::HardBird()
 {
 	this->AddSprite("assets/kingkong.tga");
 	shotdelay = new Timer();
-	health = 50;
+	timer = new Timer();
+	health = 200;
 	this->AddChild(shotdelay);
+	this->AddChild(timer);
 }
 
 HardBird::~HardBird()
@@ -15,8 +17,7 @@ HardBird::~HardBird()
 
 void HardBird::update(float deltaTime)
 {
-
-	if (shotdelay->Seconds() > 0.5)
+	if (shotdelay->Seconds() > 0.75)
 	{
 		std::cout << this->health << std::endl;
 		Bullet* bullet = new Bullet();
@@ -29,5 +30,47 @@ void HardBird::update(float deltaTime)
 		this->parent->AddChild(bullet);
 		shotdelay->StartOverTimer();
 	}
-	this->position -= glm::vec3(100.0f, 0.0f, 0.0f) * deltaTime;
+
+	if (timer->Seconds() > 7)
+	{
+		timer->StartOverTimer();
+	}
+	if (timer->Seconds() > 6)
+	{
+		this->position -= glm::vec3(50.0f, 200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 5)
+	{
+		this->position -= glm::vec3(25.0f, -200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 4)
+	{
+		this->position -= glm::vec3(50.0f, 200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 3)
+	{
+		this->position -= glm::vec3(25.0f, -200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 2)
+	{
+		this->position -= glm::vec3(25.0f, 100.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 1)
+	{
+		this->position -= glm::vec3(50.0f, -200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	if (timer->Seconds() > 0)
+	{
+		this->position -= glm::vec3(150.0f, 200.0f, 0.0f) * deltaTime;
+		return;
+	}
+	
+
+	this->position -= glm::vec3(200.0f, 0.0f, 0.0f) * deltaTime;
 }

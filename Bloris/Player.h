@@ -61,9 +61,6 @@ public:
 	///@brief health of the player
 	int health;
 
-	///@brief maximum health of the player
-	int maxHealth;
-
 	///@brief list of Bullets
 	std::vector <Bullet*> bullets;
 private:

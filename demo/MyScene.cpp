@@ -2,7 +2,7 @@
 
 MyScene::MyScene() : Scene()
 {
-	
+
 	player = new Player();
 	player->AddSprite("assets/player/Balloon.tga");
 	player->position = glm::vec3(200.0f, 300.0f, 0.0f);
@@ -17,12 +17,6 @@ MyScene::MyScene() : Scene()
 	redButton->AddSprite("assets/buttons/redbtn.tga");
 	redButton->position = glm::vec3(75.0f, 675.0f, 0.0f);
 	this->AddChild(redButton);
-
-	/*greenButton = new TestEntity();
-	greenButton->AddSprite("assets/buttons/greenbtn.tga");
-	greenButton->position = glm::vec3(150.0f, 675.0f, 0.0f);
-	this->AddChild(greenButton);*/
-	
 
 	blueButton = new TestEntity();
 	blueButton->AddSprite("assets/buttons/bluebtn.tga");
@@ -48,11 +42,6 @@ MyScene::MyScene() : Scene()
 	redDigit->AddSprite("assets/buttons/1.tga");
 	redDigit->position = glm::vec3(95.0f, 660.0f, 0.0f);
 	this->AddChild(redDigit);
-
-	/*greenDigit = new TestEntity();
-	greenDigit->AddSprite("assets/buttons/1.tga");
-	greenDigit->position = glm::vec3(165.0f, 660.0f, 0.0f);
-	this->AddChild(greenDigit);*/
 
 	blueDigit = new TestEntity();
 	blueDigit->AddSprite("assets/buttons/1.tga");
@@ -115,190 +104,231 @@ void MyScene::update(float deltaTime)
 		}
 
 	}
-		for (int i = spawner->enemies.size() - 1; i >= 0; i--) {
-			Enemy* enemy = spawner->enemies[i];
-			for (int b = enemy->bullets.size() - 1; b >= 0; b--) {
-				Bullet* bullet = enemy->bullets[b];
-				glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
-				glm::vec2 playerpos(player->position.x, player->position.y);
+	for (int i = spawner->enemies.size() - 1; i >= 0; i--) 
+	{
+		Enemy* enemy = spawner->enemies[i];
+		if (enemy->position.y < 64)
+		{
+			enemy->position.y = 64;
+		}
+		if (enemy->position.y > HEIGHT - 64)
+		{
+			enemy->position.y = HEIGHT - 64;
+		}
+		for (int b = enemy->bullets.size() - 1; b >= 0; b--) 
+		{
+			Bullet* bullet = enemy->bullets[b];
+			glm::vec2 bulletpos(bullet->position.x, bullet->position.y);
+			glm::vec2 playerpos(player->position.x, player->position.y);
 
-				if (bullet->dead && bullet != nullptr) {
-					delete bullet;
-					this->RemoveChild(bullet);
-					bullet = nullptr;
-					enemy->bullets.erase(enemy->bullets.begin() + b);
-					return;
-				}
-				if (bullet->position.x > WIDTH || bullet->position.x < 0 || bullet->position.y < 0 || bullet->position.y > HEIGHT) {
-					bullet->dead = true;
-				}
-				if (glm::distance(playerpos, bulletpos) < 64) {
-					player->health -= bullet->damage;
-					bullet->dead = true;
-				}
-				if (bullet->health <= 0) {
-					bullet->dead = true;
-				}
-			}
-
-			if (enemy->health <= 0) {
-				spawner->killed += 1;
-				this->RemoveChild(enemy);
-				delete enemy;
-				enemy = nullptr;
-				spawner->enemies.erase(spawner->enemies.begin() + i);
-				player->magicPoint += 1;
+			if (bullet->dead && bullet != nullptr) 
+			{
+				delete bullet;
+				this->RemoveChild(bullet);
+				bullet = nullptr;
+				enemy->bullets.erase(enemy->bullets.begin() + b);
 				return;
 			}
-			if (enemy->position.x < 0) {
-				std::cout << "Enemy Out of Screen" << std::endl;
-				player->health -= 1;
-				this->RemoveChild(enemy);
-				delete enemy;
-				enemy = nullptr;
-				spawner->enemies.erase(spawner->enemies.begin() + i);
+			if (bullet->position.x > WIDTH || bullet->position.x < 0 || bullet->position.y < 0 || bullet->position.y > HEIGHT) 
+			{
+				bullet->dead = true;
 			}
+			if (glm::distance(playerpos, bulletpos) < 64) 
+			{
+				player->health -= bullet->damage;
+				bullet->dead = true;
+			}
+			if (bullet->health <= 0) 
+			{
+				bullet->dead = true;
+			}
+		}
 
-		//Leveling Up
-		if (player->Level() == 2)
-		{
-			purpleDigit->ChangeSprite("assets/buttons/2.tga");
+		if (enemy->health <= 0) {
+			spawner->killed += 1;
+			this->RemoveChild(enemy);
+			delete enemy;
+			enemy = nullptr;
+			spawner->enemies.erase(spawner->enemies.begin() + i);
+			player->magicPoint += 1;
+			return;
 		}
-		if (player->Level() == 3)
-		{
-			purpleDigit->ChangeSprite("assets/buttons/3.tga");
+		if (enemy->position.x < 0) {
+			std::cout << "Enemy Out of Screen" << std::endl;
+			player->health -= 1;
+			this->RemoveChild(enemy);
+			delete enemy;
+			enemy = nullptr;
+			spawner->enemies.erase(spawner->enemies.begin() + i);
 		}
-		if (player->Level() == 4)
+	}
+	//Make it so that the player can't go out of the screen
+	if (player->position.x < 64)
+	{
+		player->position.x = 64;
+	}
+	if (spawner->bossActive)
+	{
+		if (player->position.x > WIDTH - 300)
 		{
-			purpleDigit->ChangeSprite("assets/buttons/MX.tga");
+			player->position.x = WIDTH - 300;
 		}
-		////////
+	}
+	if (player->position.x > WIDTH - 64)
+	{
+		player->position.x = WIDTH - 64;
+	}
+	if (player->position.y < 64)
+	{
+		player->position.y = 64;
+	}
+	if (player->position.y > HEIGHT - 64)
+	{
+		player->position.y = HEIGHT - 64;
+	}
+	
 
-		//Player Speed
-		if (player->Speed() == 250.0f)
-		{
-			yellowDigit ->ChangeSprite("assets/buttons/2.tga");
-		}
-		if (player->Speed() == 300.0f)
-		{
-			yellowDigit->ChangeSprite("assets/buttons/3.tga");
-		}
-		if (player->Speed() == 350.0f)
-		{
-			yellowDigit->ChangeSprite("assets/buttons/4.tga");
-		}
-		if (player->Speed() == 400.0f)
-		{
-			yellowDigit->ChangeSprite("assets/buttons/5.tga");
-		}
-		if (player->Speed() == 450.0f)
-		{
-			yellowDigit->ChangeSprite("assets/buttons/6.tga");
-		}
-		if (player->Speed() == 500.0f)
-		{
-			yellowDigit->ChangeSprite("assets/buttons/MX.tga");
-		}
-		////////
 
-		//Player HP
-		if (player->maxHealth == 4)
-		{
-			pinkDigit->ChangeSprite("assets/buttons/2.tga");
-		}
-		if (player->maxHealth == 5)
-		{
-			pinkDigit->ChangeSprite("assets/buttons/3.tga");
-		}
-		if (player->maxHealth == 6)
-		{
-			pinkDigit->ChangeSprite("assets/buttons/MX.tga");
-		}
-		////////
 
-		//BulletSpeed
-		if (player->BulletSpeed() == 500)
-		{
-			blueDigit->ChangeSprite("assets/buttons/2.tga");
-		}
-		if (player->BulletSpeed() == 600)
-		{
-			blueDigit->ChangeSprite("assets/buttons/3.tga");
-		}
-		if (player->BulletSpeed() == 700)
-		{
-			blueDigit->ChangeSprite("assets/buttons/4.tga");
-		}
-		if (player->BulletSpeed() == 800)
-		{
-			blueDigit->ChangeSprite("assets/buttons/5.tga");
-		}
-		if (player->BulletSpeed() == 900)
-		{
-			blueDigit->ChangeSprite("assets/buttons/6.tga");
-		}
-		if (player->BulletSpeed() == 1000)
-		{
-			blueDigit->ChangeSprite("assets/buttons/MX.tga");
-		}
-		////////
+	//Leveling Up
+	if (player->Level() == 2)
+	{
+		purpleDigit->ChangeSprite("assets/buttons/2.tga");
+	}
+	if (player->Level() == 3)
+	{
+		purpleDigit->ChangeSprite("assets/buttons/3.tga");
+	}
+	if (player->Level() == 4)
+	{
+		purpleDigit->ChangeSprite("assets/buttons/MX.tga");
+	}
+	////////
 
-		//BulletDamage
-		if (player->BulletDamage() == 2)
-		{
-			redDigit->ChangeSprite("assets/buttons/2.tga");
-		}
-		if (player->BulletDamage() == 3)
-		{
-			redDigit->ChangeSprite("assets/buttons/3.tga");
-		}
-		if (player->BulletDamage() == 4)
-		{
-			redDigit->ChangeSprite("assets/buttons/4.tga");
-		}
-		if (player->BulletDamage() == 5)
-		{
-			redDigit->ChangeSprite("assets/buttons/5.tga");
-		}
-		if (player->BulletDamage() == 6)
-		{
-			redDigit->ChangeSprite("assets/buttons/MX.tga");
-		}
-		////////
+	//Player Speed
+	if (player->Speed() == 250.0f)
+	{
+		yellowDigit ->ChangeSprite("assets/buttons/2.tga");
+	}
+	if (player->Speed() == 300.0f)
+	{
+		yellowDigit->ChangeSprite("assets/buttons/3.tga");
+	}
+	if (player->Speed() == 350.0f)
+	{
+		yellowDigit->ChangeSprite("assets/buttons/4.tga");
+	}
+	if (player->Speed() == 400.0f)
+	{
+		yellowDigit->ChangeSprite("assets/buttons/5.tga");
+	}
+	if (player->Speed() == 450.0f)
+	{
+		yellowDigit->ChangeSprite("assets/buttons/6.tga");
+	}
+	if (player->Speed() == 500.0f)
+	{
+		yellowDigit->ChangeSprite("assets/buttons/MX.tga");
+	}
+	////////
 
-		//FireRate
-		//if (player->FireRate() == 0.7f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/2.tga");
-		//}
-		//if (player->FireRate() == 0.6f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/3.tga");
-		//}
-		//if (player->FireRate() == 0.5f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/4.tga");
-		//}
-		//if (player->FireRate() == 0.4f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/5.tga");
-		//}
-		//if (player->FireRate() == 0.3f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/6.tga");
-		//}
-		//if (player->FireRate() == 0.2f)
-		//{
-		//	greenDigit->ChangeSprite("assets/buttons/MX.tga");
-		//}
-		
-		if (spawner->killed == 25)
-		{
-			TestEntity* winScreen = new TestEntity();
-			winScreen->AddSprite("assets/boss/WinScreen.tga");
-			winScreen->position = glm::vec3(600.0f, 300.0f, 0.0f);
-			this->AddChild(winScreen);
-		}
+	//Player HP
+	if (player->health == 4)
+	{
+		pinkDigit->ChangeSprite("assets/buttons/2.tga");
+	}
+	if (player->health == 5)
+	{
+		pinkDigit->ChangeSprite("assets/buttons/3.tga");
+	}
+	if (player->health == 6)
+	{
+		pinkDigit->ChangeSprite("assets/buttons/MX.tga");
+	}
+	////////
+
+	//BulletSpeed
+	if (player->BulletSpeed() == 500)
+	{
+		blueDigit->ChangeSprite("assets/buttons/2.tga");
+	}
+	if (player->BulletSpeed() == 600)
+	{
+		blueDigit->ChangeSprite("assets/buttons/3.tga");
+	}
+	if (player->BulletSpeed() == 700)
+	{
+		blueDigit->ChangeSprite("assets/buttons/4.tga");
+	}
+	if (player->BulletSpeed() == 800)
+	{
+		blueDigit->ChangeSprite("assets/buttons/5.tga");
+	}
+	if (player->BulletSpeed() == 900)
+	{
+		blueDigit->ChangeSprite("assets/buttons/6.tga");
+	}
+	if (player->BulletSpeed() == 1000)
+	{
+		blueDigit->ChangeSprite("assets/buttons/MX.tga");
+	}
+	////////
+
+	//BulletDamage
+	if (player->BulletDamage() == 2)
+	{
+		redDigit->ChangeSprite("assets/buttons/2.tga");
+	}
+	if (player->BulletDamage() == 3)
+	{
+		redDigit->ChangeSprite("assets/buttons/3.tga");
+	}
+	if (player->BulletDamage() == 4)
+	{
+		redDigit->ChangeSprite("assets/buttons/4.tga");
+	}
+	if (player->BulletDamage() == 5)
+	{
+		redDigit->ChangeSprite("assets/buttons/5.tga");
+	}
+	if (player->BulletDamage() == 6)
+	{
+		redDigit->ChangeSprite("assets/buttons/MX.tga");
+	}
+	////////
+
+	//FireRate
+	//if (player->FireRate() == 0.7f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/2.tga");
+	//}
+	//if (player->FireRate() == 0.6f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/3.tga");
+	//}
+	//if (player->FireRate() == 0.5f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/4.tga");
+	//}
+	//if (player->FireRate() == 0.4f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/5.tga");
+	//}
+	//if (player->FireRate() == 0.3f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/6.tga");
+	//}
+	//if (player->FireRate() == 0.2f)
+	//{
+	//	greenDigit->ChangeSprite("assets/buttons/MX.tga");
+	//}
+	
+	if (spawner->killed == 25)
+	{
+		TestEntity* winScreen = new TestEntity();
+		winScreen->AddSprite("assets/boss/WinScreen.tga");
+		winScreen->position = glm::vec3(600.0f, 300.0f, 0.0f);
+		this->AddChild(winScreen);
 	}
 }
 
